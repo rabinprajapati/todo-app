@@ -28,10 +28,11 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.put("/:id", async (req, res, next) => {
+router.patch("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const result = await todoController.editData(id, res.body);
+    const { title } = req.body;
+    const result = await todoController.editData(id, { title });
     res.json({ data: result, msg: "Successfully edited" });
   } catch (err) {
     next(err);
